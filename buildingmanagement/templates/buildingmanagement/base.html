@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Building Management{%endblock%}</title>
+</head>
+<body>
+<header>
+    {% load static %}
+    <a href="{% url 'home' %}"><img src="{% static 'buildingmanagement/logo.png' %}" height="20em"></a> |
+    {% if user.is_authenticated %}
+        {{ user }} | <a href="{% url 'logout' %}">logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">login</a> | <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+</header>
+{%block content%}
+{%endblock%}
+</body>
+</html>

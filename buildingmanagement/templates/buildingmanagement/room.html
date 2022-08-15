@@ -1,0 +1,32 @@
+{% extends 'buildingmanagement/base.html' %}
+{% block content %}
+
+<h1>{{ room.name }}</h1>
+{% if room.projector %}
+<p>Projektor: {{ room.projector }}</p>
+{% endif %}
+
+{% if room.image %}
+<img src="{{ room.image.url }}">
+{% endif %}
+
+{% if room.accesscards.all %}
+<p>Access cards:
+    {% for card in room.accesscards.all %}
+    {{ card }}
+    {% endfor %}
+{% endif %}
+</p>
+
+<p>
+    {% for day in days_in_month %}
+        {% if day not in reserved_days %}
+            <b>{{ day }}</b>
+        {% else %}
+            {{ day }}
+        {% endif %}
+    {% endfor %}
+</p>
+
+
+{% endblock %}
