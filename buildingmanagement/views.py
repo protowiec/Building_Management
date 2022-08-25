@@ -6,7 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.views.generic import ListView
 from django.views import View
 from django.db.utils import IntegrityError
@@ -48,8 +48,6 @@ def reserve(request):
             try:
                 reservation.save()
             except IntegrityError as e:
-                # TODO: sprawdzenie czy to na pewno ten constraint
-                # np. e.args: ('UNIQUE constraint failed: buildingmanagement_reservation.room_id, buildingmanagement_reservation.date',)
                 form.add_error("date", "Room already taken")
             else:
                 return redirect("reservations")
@@ -130,6 +128,7 @@ class AddRoom(View):
             room = form.save()
             return redirect("room", room.id)
         return render(request, 'buildingmanagement/add_room.html', {'form': form})
+
 
 class WeatherInfo(View):
     def get(self, request, city):

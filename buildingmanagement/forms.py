@@ -1,5 +1,4 @@
 import datetime
-
 from django import forms
 from .models import Room, Reservation
 
@@ -11,6 +10,7 @@ class ReservationForm(forms.Form):
         widget=forms.SelectDateWidget(empty_label="Nothing")
     )
 
+
 class ReservationFrom2(forms.ModelForm):
     class Meta:
         model = Reservation
@@ -18,6 +18,7 @@ class ReservationFrom2(forms.ModelForm):
         widgets = {
             "date": forms.SelectDateWidget(empty_label="Nothing")
         }
+
 
 class RoomForm(forms.ModelForm):
     class Meta:

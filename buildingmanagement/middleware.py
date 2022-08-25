@@ -2,6 +2,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 def my_middleware(get_response):
 
     def middleware(request):

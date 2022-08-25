@@ -4,13 +4,15 @@ from django.test import Client
 from django.db.utils import IntegrityError
 from .models import Room
 
+
 class RoomTestCase(TestCase):
     def setUp(self):
         room = Room(
             name="Sala",
             people_count=0,
             max_people_count=10,
-            image=None)
+            image=None
+        )
         room.save()
 
     def test_str(self):
@@ -22,6 +24,7 @@ class RoomTestCase(TestCase):
         room.people_count = 11
         with self.assertRaises(IntegrityError):
             room.save()
+
 
 class PeopleTrackingTestCase(TestCase):
     fixtures = ['example']
@@ -35,6 +38,7 @@ class PeopleTrackingTestCase(TestCase):
         room2.refresh_from_db()
         self.assertEqual(room1.people_count, 7)
         self.assertEqual(room2.people_count, 3)
+
 
 class ViewsTestCase(TestCase):
     fixtures = ['example']
@@ -70,9 +74,10 @@ class MockRequestsResponse:
                         "precipMM": "0.2",
                         "pressure": "1019",
                         "temp_C": "22"
-		            }
+                    }
                 ]
             }
+
 
 class WatherTests(TestCase):
     def setUp(self):
